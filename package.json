@@ -1,0 +1,38 @@
+{
+  "name": "sasmex-telegram-bot",
+  "version": "1.0.0",
+  "description": "Bot de Telegram avanzado para monitoreo del sistema SASMEX con integración completa del sistema host",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node index.js",
+    "check": "node --check index.js",
+    "test": "echo \"No tests specified\" && exit 0"
+  },
+  "keywords": [
+    "telegram",
+    "bot",
+    "sasmex",
+    "monitoring",
+    "system-integration",
+    "automation"
+  ],
+  "author": "Vicentegg4212",
+  "license": "MIT",
+  "dependencies": {
+    "node-telegram-bot-api": "^0.66.0",
+    "puppeteer": "^24.36.1",
+    "rss-parser": "^3.13.0"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Vicentegg4212/SISMOS.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Vicentegg4212/SISMOS/issues"
+  },
+  "homepage": "https://github.com/Vicentegg4212/SISMOS#readme"
+}
