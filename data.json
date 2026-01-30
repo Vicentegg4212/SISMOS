@@ -1,0 +1,18 @@
+{
+  "subscribers": [
+    "5916255967",
+    "-1001939304742",
+    "7721087125",
+    "5252078401"
+  ],
+  "lastContent": "20260128062808",
+  "lastAlert": null,
+  "lastUpdate": "2026-01-29T19:03:47.451Z",
+  "users": {
+    "5916255967": {
+      "subscribed": true,
+      "severity": "all",
+      "muted": false
+    }
+  }
+}

@@ -1967,7 +1967,10 @@ Recibirás *imágenes* de alertas sísmicas del *SASMEX* en tiempo real.
         // /logs
         this.bot.onText(/\/logs(?: (\d+))?/, async (msg, match) => {
             const chatId = msg.chat.id;
-            if (!isAdmin(chatId)) return;
+            if (!isAdmin(chatId)) {
+                await this.sendMessage(chatId, `❌ *Acceso denegado*\n\nEste comando requiere permisos de administrador.\n\nUsa /become_admin para convertirte en administrador.`, { parse_mode: 'Markdown' });
+                return;
+            }
             
             const lines = match && match[1] ? parseInt(match[1]) : 20;
             const logs = getLogs(lines);
@@ -1981,7 +1984,10 @@ Recibirás *imágenes* de alertas sísmicas del *SASMEX* en tiempo real.
         // /broadcast
         this.bot.onText(/\/broadcast (.+)/, async (msg, match) => {
             const chatId = msg.chat.id;
-            if (!isAdmin(chatId)) return;
+            if (!isAdmin(chatId)) {
+                await this.sendMessage(chatId, `❌ *Acceso denegado*\n\nEste comando requiere permisos de administrador.\n\nUsa /become_admin para convertirte en administrador.`, { parse_mode: 'Markdown' });
+                return;
+            }
             
             const message = match[1];
             const subs = getSubscribers();
@@ -2028,7 +2034,10 @@ Recibirás *imágenes* de alertas sísmicas del *SASMEX* en tiempo real.
         // /restart - Reiniciar el bot
         this.bot.onText(/\/restart(?: (.+))?/, async (msg, match) => {
             const chatId = msg.chat.id;
-            if (!isAdmin(chatId)) return;
+            if (!isAdmin(chatId)) {
+                await this.sendMessage(chatId, `❌ *Acceso denegado*\n\nEste comando requiere permisos de administrador.\n\nUsa /become_admin para convertirte en administrador.`, { parse_mode: 'Markdown' });
+                return;
+            }
             
             const reason = match && match[1] ? match[1] : 'Reinicio manual';
             
@@ -2044,7 +2053,10 @@ Recibirás *imágenes* de alertas sísmicas del *SASMEX* en tiempo real.
         // /backup - Crear backup de datos
         this.bot.onText(/\/backup/, async (msg) => {
             const chatId = msg.chat.id;
-            if (!isAdmin(chatId)) return;
+            if (!isAdmin(chatId)) {
+                await this.sendMessage(chatId, `❌ *Acceso denegado*\n\nEste comando requiere permisos de administrador.\n\nUsa /become_admin para convertirte en administrador.`, { parse_mode: 'Markdown' });
+                return;
+            }
             
             try {
                 const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
@@ -2063,7 +2075,10 @@ Recibirás *imágenes* de alertas sísmicas del *SASMEX* en tiempo real.
         // /memory - Información de memoria
         this.bot.onText(/\/memory/, async (msg) => {
             const chatId = msg.chat.id;
-            if (!isAdmin(chatId)) return;
+            if (!isAdmin(chatId)) {
+                await this.sendMessage(chatId, `❌ *Acceso denegado*\n\nEste comando requiere permisos de administrador.\n\nUsa /become_admin para convertirte en administrador.`, { parse_mode: 'Markdown' });
+                return;
+            }
             
             const mem = process.memoryUsage();
             const text = `
@@ -2085,7 +2100,10 @@ Recibirás *imágenes* de alertas sísmicas del *SASMEX* en tiempo real.
         // /performance - Métricas de rendimiento
         this.bot.onText(/\/performance/, async (msg) => {
             const chatId = msg.chat.id;
-            if (!isAdmin(chatId)) return;
+            if (!isAdmin(chatId)) {
+                await this.sendMessage(chatId, `❌ *Acceso denegado*\n\nEste comando requiere permisos de administrador.\n\nUsa /become_admin para convertirte en administrador.`, { parse_mode: 'Markdown' });
+                return;
+            }
             
             const startTime = process.hrtime.bigint();
             await sleep(1); // Pequeña pausa para medir
@@ -2111,7 +2129,10 @@ Recibirás *imágenes* de alertas sísmicas del *SASMEX* en tiempo real.
         // /subscribers - Gestionar suscriptores
         this.bot.onText(/\/subscribers(?: (list|count|clean|remove (\d+)))?/, async (msg, match) => {
             const chatId = msg.chat.id;
-            if (!isAdmin(chatId)) return;
+            if (!isAdmin(chatId)) {
+                await this.sendMessage(chatId, `❌ *Acceso denegado*\n\nEste comando requiere permisos de administrador.\n\nUsa /become_admin para convertirte en administrador.`, { parse_mode: 'Markdown' });
+                return;
+            }
             
             const action = match && match[1];
             const targetId = match && match[2];
@@ -2169,7 +2190,10 @@ Recibirás *imágenes* de alertas sísmicas del *SASMEX* en tiempo real.
         // /clear_logs - Limpiar logs
         this.bot.onText(/\/clear_logs/, async (msg) => {
             const chatId = msg.chat.id;
-            if (!isAdmin(chatId)) return;
+            if (!isAdmin(chatId)) {
+                await this.sendMessage(chatId, `❌ *Acceso denegado*\n\nEste comando requiere permisos de administrador.\n\nUsa /become_admin para convertirte en administrador.`, { parse_mode: 'Markdown' });
+                return;
+            }
             
             try {
                 fs.writeFileSync('bot.log', '');
@@ -2183,7 +2207,10 @@ Recibirás *imágenes* de alertas sísmicas del *SASMEX* en tiempo real.
         // /system_info - Información del sistema
         this.bot.onText(/\/system_info/, async (msg) => {
             const chatId = msg.chat.id;
-            if (!isAdmin(chatId)) return;
+            if (!isAdmin(chatId)) {
+                await this.sendMessage(chatId, `❌ *Acceso denegado*\n\nEste comando requiere permisos de administrador.\n\nUsa /become_admin para convertirte en administrador.`, { parse_mode: 'Markdown' });
+                return;
+            }
             
             const os = require('os');
             const text = `
@@ -2208,7 +2235,10 @@ Recibirás *imágenes* de alertas sísmicas del *SASMEX* en tiempo real.
         // /force_alert - Forzar envío de alerta
         this.bot.onText(/\/force_alert(?: (.+))?/, async (msg, match) => {
             const chatId = msg.chat.id;
-            if (!isAdmin(chatId)) return;
+            if (!isAdmin(chatId)) {
+                await this.sendMessage(chatId, `❌ *Acceso denegado*\n\nEste comando requiere permisos de administrador.\n\nUsa /become_admin para convertirte en administrador.`, { parse_mode: 'Markdown' });
+                return;
+            }
             
             const severity = match && match[1] ? match[1] : 'moderada';
             
@@ -2242,7 +2272,10 @@ Recibirás *imágenes* de alertas sísmicas del *SASMEX* en tiempo real.
         // /maintenance - Modo mantenimiento
         this.bot.onText(/\/maintenance (on|off)/, async (msg, match) => {
             const chatId = msg.chat.id;
-            if (!isAdmin(chatId)) return;
+            if (!isAdmin(chatId)) {
+                await this.sendMessage(chatId, `❌ *Acceso denegado*\n\nEste comando requiere permisos de administrador.\n\nUsa /become_admin para convertirte en administrador.`, { parse_mode: 'Markdown' });
+                return;
+            }
             
             const action = match[1];
             
@@ -2260,7 +2293,10 @@ Recibirás *imágenes* de alertas sísmicas del *SASMEX* en tiempo real.
         // /set_config - Configurar parámetros del bot
         this.bot.onText(/\/set_config (\w+) (.+)/, async (msg, match) => {
             const chatId = msg.chat.id;
-            if (!isAdmin(chatId)) return;
+            if (!isAdmin(chatId)) {
+                await this.sendMessage(chatId, `❌ *Acceso denegado*\n\nEste comando requiere permisos de administrador.\n\nUsa /become_admin para convertirte en administrador.`, { parse_mode: 'Markdown' });
+                return;
+            }
             
             const param = match[1];
             const value = match[2];
@@ -2299,7 +2335,10 @@ Recibirás *imágenes* de alertas sísmicas del *SASMEX* en tiempo real.
         // /restore_backup - Restaurar desde backup
         this.bot.onText(/\/restore_backup(?: (\d+))?/, async (msg, match) => {
             const chatId = msg.chat.id;
-            if (!isAdmin(chatId)) return;
+            if (!isAdmin(chatId)) {
+                await this.sendMessage(chatId, `❌ *Acceso denegado*\n\nEste comando requiere permisos de administrador.\n\nUsa /become_admin para convertirte en administrador.`, { parse_mode: 'Markdown' });
+                return;
+            }
             
             try {
                 const backupDir = __dirname;
@@ -2346,7 +2385,10 @@ Recibirás *imágenes* de alertas sísmicas del *SASMEX* en tiempo real.
         // /list_backups - Listar backups disponibles
         this.bot.onText(/\/list_backups/, async (msg) => {
             const chatId = msg.chat.id;
-            if (!isAdmin(chatId)) return;
+            if (!isAdmin(chatId)) {
+                await this.sendMessage(chatId, `❌ *Acceso denegado*\n\nEste comando requiere permisos de administrador.\n\nUsa /become_admin para convertirte en administrador.`, { parse_mode: 'Markdown' });
+                return;
+            }
             
             try {
                 const backupDir = __dirname;
@@ -2379,7 +2421,10 @@ Recibirás *imágenes* de alertas sísmicas del *SASMEX* en tiempo real.
         });
         this.bot.onText(/\/recovery_status/, async (msg) => {
             const chatId = msg.chat.id;
-            if (!isAdmin(chatId)) return;
+            if (!isAdmin(chatId)) {
+                await this.sendMessage(chatId, `❌ *Acceso denegado*\n\nEste comando requiere permisos de administrador.\n\nUsa /become_admin para convertirte en administrador.`, { parse_mode: 'Markdown' });
+                return;
+            }
             
             const recoveryTime = this.lastRecovery ? 
                 `${Math.round((Date.now() - this.lastRecovery.getTime()) / 1000 / 60)} min atrás` : 
@@ -2408,7 +2453,10 @@ Recibirás *imágenes* de alertas sísmicas del *SASMEX* en tiempo real.
         // /force_check - Forzar verificación inmediata
         this.bot.onText(/\/force_check/, async (msg) => {
             const chatId = msg.chat.id;
-            if (!isAdmin(chatId)) return;
+            if (!isAdmin(chatId)) {
+                await this.sendMessage(chatId, `❌ *Acceso denegado*\n\nEste comando requiere permisos de administrador.\n\nUsa /become_admin para convertirte en administrador.`, { parse_mode: 'Markdown' });
+                return;
+            }
             
             await this.sendMessage(chatId, '🔍 *Forzando verificación inmediata...*', { parse_mode: 'Markdown' });
             
@@ -2423,7 +2471,10 @@ Recibirás *imágenes* de alertas sísmicas del *SASMEX* en tiempo real.
         // /notify_admin - Enviar notificación de prueba al admin
         this.bot.onText(/\/notify_admin (.+)/, async (msg, match) => {
             const chatId = msg.chat.id;
-            if (!isAdmin(chatId)) return;
+            if (!isAdmin(chatId)) {
+                await this.sendMessage(chatId, `❌ *Acceso denegado*\n\nEste comando requiere permisos de administrador.\n\nUsa /become_admin para convertirte en administrador.`, { parse_mode: 'Markdown' });
+                return;
+            }
             
             const message = match[1];
             if (CONFIG.adminChatId) {
@@ -2440,7 +2491,10 @@ Recibirás *imágenes* de alertas sísmicas del *SASMEX* en tiempo real.
         
         this.bot.onText(/\/stats_detailed/, async (msg) => {
             const chatId = msg.chat.id;
-            if (!isAdmin(chatId)) return;
+            if (!isAdmin(chatId)) {
+                await this.sendMessage(chatId, `❌ *Acceso denegado*\n\nEste comando requiere permisos de administrador.\n\nUsa /become_admin para convertirte en administrador.`, { parse_mode: 'Markdown' });
+                return;
+            }
             
             const data = loadData();
             const users = data.users || {};
@@ -2483,7 +2537,10 @@ Recibirás *imágenes* de alertas sísmicas del *SASMEX* en tiempo real.
         // ✅ NUEVO: /send_logs - Enviar logs como documento
         this.bot.onText(/\/send_logs/, async (msg) => {
             const chatId = msg.chat.id;
-            if (!isAdmin(chatId)) return;
+            if (!isAdmin(chatId)) {
+                await this.sendMessage(chatId, `❌ *Acceso denegado*\n\nEste comando requiere permisos de administrador.\n\nUsa /become_admin para convertirte en administrador.`, { parse_mode: 'Markdown' });
+                return;
+            }
             
             try {
                 if (!fs.existsSync(CONFIG.logFile)) {
@@ -2510,7 +2567,10 @@ Recibirás *imágenes* de alertas sísmicas del *SASMEX* en tiempo real.
         // ✅ NUEVO: /send_backup - Enviar backup más reciente como documento
         this.bot.onText(/\/send_backup/, async (msg) => {
             const chatId = msg.chat.id;
-            if (!isAdmin(chatId)) return;
+            if (!isAdmin(chatId)) {
+                await this.sendMessage(chatId, `❌ *Acceso denegado*\n\nEste comando requiere permisos de administrador.\n\nUsa /become_admin para convertirte en administrador.`, { parse_mode: 'Markdown' });
+                return;
+            }
             
             try {
                 const backupDir = __dirname;
@@ -2543,7 +2603,10 @@ Recibirás *imágenes* de alertas sísmicas del *SASMEX* en tiempo real.
         // ✅ NUEVO: /edit_last - Editar el último mensaje enviado por el bot
         this.bot.onText(/\/edit_last (.+)/, async (msg, match) => {
             const chatId = msg.chat.id;
-            if (!isAdmin(chatId)) return;
+            if (!isAdmin(chatId)) {
+                await this.sendMessage(chatId, `❌ *Acceso denegado*\n\nEste comando requiere permisos de administrador.\n\nUsa /become_admin para convertirte en administrador.`, { parse_mode: 'Markdown' });
+                return;
+            }
             
             const newText = match[1];
             
@@ -2561,7 +2624,10 @@ Recibirás *imágenes* de alertas sísmicas del *SASMEX* en tiempo real.
         // ✅ NUEVO: /bot_info - Información detallada del bot usando API de Telegram
         this.bot.onText(/\/bot_info/, async (msg) => {
             const chatId = msg.chat.id;
-            if (!isAdmin(chatId)) return;
+            if (!isAdmin(chatId)) {
+                await this.sendMessage(chatId, `❌ *Acceso denegado*\n\nEste comando requiere permisos de administrador.\n\nUsa /become_admin para convertirte en administrador.`, { parse_mode: 'Markdown' });
+                return;
+            }
             
             try {
                 const botInfo = await this.bot.getMe();
@@ -2601,7 +2667,10 @@ Recibirás *imágenes* de alertas sísmicas del *SASMEX* en tiempo real.
         // ✅ NUEVO: /test_buttons - Probar botones inline
         this.bot.onText(/\/test_buttons/, async (msg) => {
             const chatId = msg.chat.id;
-            if (!isAdmin(chatId)) return;
+            if (!isAdmin(chatId)) {
+                await this.sendMessage(chatId, `❌ *Acceso denegado*\n\nEste comando requiere permisos de administrador.\n\nUsa /become_admin para convertirte en administrador.`, { parse_mode: 'Markdown' });
+                return;
+            }
             
             const buttons = [
                 [{ text: '✅ Confirmar', callback_data: 'test_confirm' }],
@@ -2618,7 +2687,10 @@ Recibirás *imágenes* de alertas sísmicas del *SASMEX* en tiempo real.
         // ✅ NUEVO: /check_connection - Verificar conectividad con SASMEX
         this.bot.onText(/\/check_connection/, async (msg) => {
             const chatId = msg.chat.id;
-            if (!isAdmin(chatId)) return;
+            if (!isAdmin(chatId)) {
+                await this.sendMessage(chatId, `❌ *Acceso denegado*\n\nEste comando requiere permisos de administrador.\n\nUsa /become_admin para convertirte en administrador.`, { parse_mode: 'Markdown' });
+                return;
+            }
             
             await this.sendMessage(chatId, '🔍 *Verificando conectividad con SASMEX...*', { parse_mode: 'Markdown' });
             
@@ -2655,7 +2727,10 @@ ${response.ok ? '✅ El sitio de SASMEX está accesible' : '❌ Problemas de con
         // ✅ NUEVO: /reset_browser - Reiniciar instancia de Puppeteer
         this.bot.onText(/\/reset_browser/, async (msg) => {
             const chatId = msg.chat.id;
-            if (!isAdmin(chatId)) return;
+            if (!isAdmin(chatId)) {
+                await this.sendMessage(chatId, `❌ *Acceso denegado*\n\nEste comando requiere permisos de administrador.\n\nUsa /become_admin para convertirte en administrador.`, { parse_mode: 'Markdown' });
+                return;
+            }
             
             await this.sendMessage(chatId, '🔄 *Reiniciando navegador Puppeteer...*', { parse_mode: 'Markdown' });
             
@@ -2685,7 +2760,10 @@ ${response.ok ? '✅ El sitio de SASMEX está accesible' : '❌ Problemas de con
         // ✅ NUEVO: /bot_stats - Estadísticas detalladas del bot
         this.bot.onText(/\/bot_stats/, async (msg) => {
             const chatId = msg.chat.id;
-            if (!isAdmin(chatId)) return;
+            if (!isAdmin(chatId)) {
+                await this.sendMessage(chatId, `❌ *Acceso denegado*\n\nEste comando requiere permisos de administrador.\n\nUsa /become_admin para convertirte en administrador.`, { parse_mode: 'Markdown' });
+                return;
+            }
             
             try {
                 const data = loadData();
@@ -2743,7 +2821,10 @@ ${response.ok ? '✅ El sitio de SASMEX está accesible' : '❌ Problemas de con
         // ✅ NUEVO: /file_info - Información de archivos del sistema
         this.bot.onText(/\/file_info/, async (msg) => {
             const chatId = msg.chat.id;
-            if (!isAdmin(chatId)) return;
+            if (!isAdmin(chatId)) {
+                await this.sendMessage(chatId, `❌ *Acceso denegado*\n\nEste comando requiere permisos de administrador.\n\nUsa /become_admin para convertirte en administrador.`, { parse_mode: 'Markdown' });
+                return;
+            }
             
             try {
                 const files = [
@@ -2787,7 +2868,10 @@ ${response.ok ? '✅ El sitio de SASMEX está accesible' : '❌ Problemas de con
         // ✅ NUEVO: /exec_cmd - Ejecutar comandos seguros del sistema
         this.bot.onText(/\/exec_cmd (.+)/, async (msg, match) => {
             const chatId = msg.chat.id;
-            if (!isAdmin(chatId)) return;
+            if (!isAdmin(chatId)) {
+                await this.sendMessage(chatId, `❌ *Acceso denegado*\n\nEste comando requiere permisos de administrador.\n\nUsa /become_admin para convertirte en administrador.`, { parse_mode: 'Markdown' });
+                return;
+            }
             
             const command = match[1];
             
@@ -3711,7 +3795,10 @@ ${truncated}
         // ✅ NUEVO: /user_management - Gestión de usuarios
         this.bot.onText(/\/user_management/, async (msg) => {
             const chatId = msg.chat.id;
-            if (!isAdmin(chatId)) return;
+            if (!isAdmin(chatId)) {
+                await this.sendMessage(chatId, `❌ *Acceso denegado*\n\nEste comando requiere permisos de administrador.\n\nUsa /become_admin para convertirte en administrador.`, { parse_mode: 'Markdown' });
+                return;
+            }
             
             try {
                 const data = loadData();
@@ -3754,7 +3841,10 @@ ${truncated}
         // ✅ NUEVO: /backup_manager - Administrar backups
         this.bot.onText(/\/backup_manager/, async (msg) => {
             const chatId = msg.chat.id;
-            if (!isAdmin(chatId)) return;
+            if (!isAdmin(chatId)) {
+                await this.sendMessage(chatId, `❌ *Acceso denegado*\n\nEste comando requiere permisos de administrador.\n\nUsa /become_admin para convertirte en administrador.`, { parse_mode: 'Markdown' });
+                return;
+            }
             
             try {
                 const backupDir = __dirname;
@@ -3797,7 +3887,10 @@ ${truncated}
         // ✅ NUEVO: /security_status - Estado de seguridad
         this.bot.onText(/\/security_status/, async (msg) => {
             const chatId = msg.chat.id;
-            if (!isAdmin(chatId)) return;
+            if (!isAdmin(chatId)) {
+                await this.sendMessage(chatId, `❌ *Acceso denegado*\n\nEste comando requiere permisos de administrador.\n\nUsa /become_admin para convertirte en administrador.`, { parse_mode: 'Markdown' });
+                return;
+            }
             
             try {
                 const info = `🔒 *ESTADO DE SEGURIDAD*\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n` +
@@ -3838,7 +3931,10 @@ ${truncated}
         // ✅ NUEVO: /heartbeat - Forzar envío de heartbeat
         this.bot.onText(/\/heartbeat/, async (msg) => {
             const chatId = msg.chat.id;
-            if (!isAdmin(chatId)) return;
+            if (!isAdmin(chatId)) {
+                await this.sendMessage(chatId, `❌ *Acceso denegado*\n\nEste comando requiere permisos de administrador.\n\nUsa /become_admin para convertirte en administrador.`, { parse_mode: 'Markdown' });
+                return;
+            }
             
             await this.sendHeartbeat();
             await this.sendMessage(chatId, '💓 Heartbeat enviado manualmente', { parse_mode: 'Markdown' });
@@ -3847,7 +3943,10 @@ ${truncated}
         // ✅ NUEVO: /system_status - Estado completo del sistema
         this.bot.onText(/\/system_status/, async (msg) => {
             const chatId = msg.chat.id;
-            if (!isAdmin(chatId)) return;
+            if (!isAdmin(chatId)) {
+                await this.sendMessage(chatId, `❌ *Acceso denegado*\n\nEste comando requiere permisos de administrador.\n\nUsa /become_admin para convertirte en administrador.`, { parse_mode: 'Markdown' });
+                return;
+            }
             
             const status = await this.getSystemStatus();
             await this.sendMessage(chatId, status, { parse_mode: 'Markdown' });
@@ -3856,7 +3955,10 @@ ${truncated}
         // ✅ NUEVO: /alert_test - Probar sistema de alertas
         this.bot.onText(/\/alert_test(?: (\w+))?/, async (msg, match) => {
             const chatId = msg.chat.id;
-            if (!isAdmin(chatId)) return;
+            if (!isAdmin(chatId)) {
+                await this.sendMessage(chatId, `❌ *Acceso denegado*\n\nEste comando requiere permisos de administrador.\n\nUsa /become_admin para convertirte en administrador.`, { parse_mode: 'Markdown' });
+                return;
+            }
             
             const priority = match && match[1] ? match[1] : 'normal';
             const testMessage = `🧪 **PRUEBA DE ALERTA ${priority.toUpperCase()}**\n\nEsta es una alerta de prueba para verificar el sistema de notificaciones.`;
@@ -3868,7 +3970,10 @@ ${truncated}
         // ✅ NUEVO: /diagnose - Diagnóstico completo del sistema
         this.bot.onText(/\/diagnose/, async (msg) => {
             const chatId = msg.chat.id;
-            if (!isAdmin(chatId)) return;
+            if (!isAdmin(chatId)) {
+                await this.sendMessage(chatId, `❌ *Acceso denegado*\n\nEste comando requiere permisos de administrador.\n\nUsa /become_admin para convertirte en administrador.`, { parse_mode: 'Markdown' });
+                return;
+            }
             
             await this.sendMessage(chatId, '🔍 *INICIANDO DIAGNÓSTICO COMPLETO...*', { parse_mode: 'Markdown' });
             
@@ -3879,7 +3984,10 @@ ${truncated}
         // ✅ NUEVO: /alert_config - Configurar sistema de alertas
         this.bot.onText(/\/alert_config(?: (\w+) (.+))?/, async (msg, match) => {
             const chatId = msg.chat.id;
-            if (!isAdmin(chatId)) return;
+            if (!isAdmin(chatId)) {
+                await this.sendMessage(chatId, `❌ *Acceso denegado*\n\nEste comando requiere permisos de administrador.\n\nUsa /become_admin para convertirte en administrador.`, { parse_mode: 'Markdown' });
+                return;
+            }
             
             if (!match || !match[1]) {
                 // Mostrar configuración actual
@@ -3985,7 +4093,10 @@ ${truncated}
         // ✅ NUEVO: /vscode_status - Estado de VS Code
         this.bot.onText(/\/vscode_status/, async (msg) => {
             const chatId = msg.chat.id;
-            if (!isAdmin(chatId)) return;
+            if (!isAdmin(chatId)) {
+                await this.sendMessage(chatId, `❌ *Acceso denegado*\n\nEste comando requiere permisos de administrador.\n\nUsa /become_admin para convertirte en administrador.`, { parse_mode: 'Markdown' });
+                return;
+            }
             
             await this.sendMessage(chatId, '🔍 *Verificando estado de VS Code...*', { parse_mode: 'Markdown' });
             
@@ -4043,7 +4154,10 @@ ${truncated}
         // ✅ NUEVO: /vscode_open - Abrir archivo en VS Code
         this.bot.onText(/\/vscode_open (.+)/, async (msg, match) => {
             const chatId = msg.chat.id;
-            if (!isAdmin(chatId)) return;
+            if (!isAdmin(chatId)) {
+                await this.sendMessage(chatId, `❌ *Acceso denegado*\n\nEste comando requiere permisos de administrador.\n\nUsa /become_admin para convertirte en administrador.`, { parse_mode: 'Markdown' });
+                return;
+            }
             
             const filePath = match[1];
             
@@ -4075,7 +4189,10 @@ ${truncated}
         // ✅ NUEVO: /host_permission - Solicitar permiso para operaciones del host
         this.bot.onText(/\/host_permission (.+)/, async (msg, match) => {
             const chatId = msg.chat.id;
-            if (!isAdmin(chatId)) return;
+            if (!isAdmin(chatId)) {
+                await this.sendMessage(chatId, `❌ *Acceso denegado*\n\nEste comando requiere permisos de administrador.\n\nUsa /become_admin para convertirte en administrador.`, { parse_mode: 'Markdown' });
+                return;
+            }
             
             const operation = match[1];
             
@@ -4099,7 +4216,10 @@ ${truncated}
         // ✅ NUEVO: /system_notification - Enviar notificación al sistema
         this.bot.onText(/\/system_notification (.+)/, async (msg, match) => {
             const chatId = msg.chat.id;
-            if (!isAdmin(chatId)) return;
+            if (!isAdmin(chatId)) {
+                await this.sendMessage(chatId, `❌ *Acceso denegado*\n\nEste comando requiere permisos de administrador.\n\nUsa /become_admin para convertirte en administrador.`, { parse_mode: 'Markdown' });
+                return;
+            }
             
             const message = match[1];
             
